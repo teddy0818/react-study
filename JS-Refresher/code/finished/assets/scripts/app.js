@@ -50,3 +50,32 @@ export default () => {
     console.log("arrow");
 }
 */
+
+/*
+// 객체와 클래스
+// 객체
+const user = { // 중괄호로 선언
+    name: "Max", // key, value 형식
+    age: 34,
+    greet() {
+        console.log("Hello !");
+    }
+}
+console.log(user.name);
+user.greet();
+
+// 클래스
+class User { // class명의 첫글자는 대문자
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    greet() {
+        console.log("Hello !");
+    }
+}
+const user1 = new User("Manuel", 35); // 선언 된 클래스를 이용해 객체 생성
+console.log(user1.name);
+user1.greet();
+*/
+
