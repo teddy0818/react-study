@@ -162,6 +162,7 @@ greater(() => {
 
 /*
 // 함수 안에서 함수를 선언하고 실행 가능 함
+// 일반 JS에서는 잘 안 쓰이지만, 리액트에서는 많이 쓰임
 function init() {
     function greet() {
         console.log("Hi !");
@@ -171,3 +172,15 @@ function init() {
 
 init();
 */
+
+// 참조
+
+// String, Number, boolean 형식의 변수는 항상 새 값을 생성한다
+// ex) 값이 바뀌면 새로운 값을 만들어서 변수에 저장. 기존 값 수정 불가
+
+// 배열은 기존의 값을 수정한다
+// 배열이 저장 된 주솟값에 접근 -> 배열에 새 원소 추가
+// 상수에는 주솟값을 저장하고, 주소는 변경되지 않으므로 상수 인 변수에 저장돼있는 배열 및 객체를 수정가능함
+const hobbies = ["Sports", "Cooking"];
+hobbies.push("Working");
+console.log(hobbies);
