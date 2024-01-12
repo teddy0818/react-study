@@ -97,7 +97,7 @@ const editedHobbies = hobbies.map((item) => ({item})); // 화살푬 함수에서
 console.log(editedHobbies);
 */
 
-/*
+
 // 배열 및 객체의 분해
 
 // 배열 분해
@@ -113,4 +113,24 @@ const { name: userName, age } = {  // 별칭 사용 가능 (userName)
 };
 console.log(userName);
 console.log(age);
-*/
+
+// 배열의 전개 연산자
+const hobbies = ["Sports", "Cooking", "Reading"];
+const newHobbies = ["Reading"];
+// 각각의 원소들이 합쳐짐
+const mergedHobbies = [...hobbies, ...newHobbies];
+console.log(mergedHobbies);
+
+// 객체의 전개 연산자
+const user = { // 중괄호로 선언
+    name: "Max", // key, value 형식
+    age: 34,
+    greet() {
+        console.log("Hello !");
+    }
+}
+const extendedUser = {
+    isAdmin: true,
+    ...user
+};
+console.log(extendedUser);
