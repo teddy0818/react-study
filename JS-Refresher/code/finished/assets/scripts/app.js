@@ -97,7 +97,7 @@ const editedHobbies = hobbies.map((item) => ({item})); // 화살푬 함수에서
 console.log(editedHobbies);
 */
 
-
+/*
 // 배열 및 객체의 분해
 
 // 배열 분해
@@ -134,3 +134,40 @@ const extendedUser = {
     ...user
 };
 console.log(extendedUser);
+*/
+
+/* 
+// 함수 매개변수로 쓰이는 함수
+function handleTimeout() {
+    console.log("Timed out!");
+}
+
+const handleTimeout2 = () => {
+    console.log("Timed out... again!");
+};
+// 함수를 매개변수로 하는데, 함수를 호출하는게 아니라 선언하는 걸 명심해야한다
+setTimeout(handleTimeout, 2000);
+setTimeout(handleTimeout2, 3000);
+setTimeout(() => {
+    console.log("More timing out...");
+}, 4000)
+
+function greater(greatFn) {
+    greatFn();
+}
+greater(() => {
+    console.log("great!")
+});
+*/
+
+/*
+// 함수 안에서 함수를 선언하고 실행 가능 함
+function init() {
+    function greet() {
+        console.log("Hi !");
+    }
+    greet();
+}
+
+init();
+*/
