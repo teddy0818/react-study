@@ -79,3 +79,19 @@ console.log(user1.name);
 user1.greet();
 */
 
+
+// 배열함수 - 간결한 코드 사용 가능
+const hobbies = ["Sports", "Cooking", "Reading"];
+
+// push - 배열에 요소 추가
+hobbies.push("working");
+console.log(hobbies);
+
+// findeIndex - 찾고자 하는 원소의 index 값을 구할 수 있음.
+// 배열의 모든 원소를 돌면서 'Sports' 값을 찾아 index 값을 반환
+const index = hobbies.findIndex((item) => item === "Sports");
+console.log(index);
+
+// map - 기존 배열을 이용해 새로운 더미값을 만들수 있음. 이때 기본배열은 안변하고 새배열 반환함
+const editedHobbies = hobbies.map((item) => ({item})); // 화살푬 함수에서 object 반환하려면 소괄호로 감싸줘야함
+console.log(editedHobbies);
