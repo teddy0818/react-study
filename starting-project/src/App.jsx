@@ -3,8 +3,8 @@ import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/TabButton.jsx";
 
-function handleClick() {
-  console.log("Click !!");
+function handleClick(selectedButon) {
+  console.log(selectedButon);
 }
 
 function App() {
@@ -24,10 +24,12 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={handleClick}>Components</TabButton>
-            <TabButton onSelect={handleClick}>JSX</TabButton>
-            <TabButton onSelect={handleClick}>Props</TabButton>
-            <TabButton onSelect={handleClick}>State</TabButton>
+            <TabButton onSelect={() => handleClick("components")}>
+              Components
+            </TabButton>
+            <TabButton onSelect={() => handleClick("jsx")}>JSX</TabButton>
+            <TabButton onSelect={() => handleClick("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleClick("state")}>State</TabButton>
           </menu>
         </section>
         <h2>Time to get started!</h2>
