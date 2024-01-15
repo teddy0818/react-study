@@ -3,7 +3,7 @@ import { EXAMPLES } from "./data-with-examples";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/TabButton.jsx";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 function App() {
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <div>
+    <Fragment>
       <Header />
       <main>
         <section id="core-concepts">
@@ -72,7 +72,7 @@ function App() {
         </section>
         {tabContent}
       </main>
-    </div>
+    </Fragment>
   );
 }
 
