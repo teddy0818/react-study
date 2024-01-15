@@ -1,6 +1,7 @@
 import { EXAMPLES } from "../data-with-examples";
 import TabButton from "./TabButton.jsx";
 import { useState } from "react";
+import Section from "./Section";
 
 export default function Examples() {
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -26,37 +27,34 @@ export default function Examples() {
     );
   }
   return (
-    <>
-      <section id="examples">
-        <h2>Examples</h2>
-        <menu>
-          <TabButton
-            isSelected={selectedTopic === "components" ? true : false}
-            onSelect={() => handleClick("components")}
-          >
-            Components
-          </TabButton>
-          <TabButton
-            isSelected={selectedTopic === "jsx" ? true : false}
-            onSelect={() => handleClick("jsx")}
-          >
-            JSX
-          </TabButton>
-          <TabButton
-            isSelected={selectedTopic === "props" ? true : false}
-            onSelect={() => handleClick("props")}
-          >
-            Props
-          </TabButton>
-          <TabButton
-            isSelected={selectedTopic === "state" ? true : false}
-            onSelect={() => handleClick("state")}
-          >
-            State
-          </TabButton>
-        </menu>
-      </section>
+    <Section title="Examples" id="examples">
+      <menu>
+        <TabButton
+          isSelected={selectedTopic === "components" ? true : false}
+          onClick={() => handleClick("components")}
+        >
+          Components
+        </TabButton>
+        <TabButton
+          isSelected={selectedTopic === "jsx" ? true : false}
+          onClick={() => handleClick("jsx")}
+        >
+          JSX
+        </TabButton>
+        <TabButton
+          isSelected={selectedTopic === "props" ? true : false}
+          onClick={() => handleClick("props")}
+        >
+          Props
+        </TabButton>
+        <TabButton
+          isSelected={selectedTopic === "state" ? true : false}
+          onClick={() => handleClick("state")}
+        >
+          State
+        </TabButton>
+      </menu>
       {tabContent}
-    </>
+    </Section>
   );
 }
