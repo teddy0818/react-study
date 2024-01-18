@@ -6,22 +6,22 @@ import {
 
 export default function Result({ paramInputs }) {
   const calculatedResult = calculateInvestmentResults(paramInputs);
-  console.log(calculatedResult);
+
   return (
     <table id="result" className="center">
       <thead>
         <tr>
-          {colNames.map((colName) => (
-            <td>{colName}</td>
+          {colNames.map((colName, index) => (
+            <td key={index}>{colName}</td>
           ))}
         </tr>
       </thead>
       <tbody>
-        {calculatedResult.map((result) => {
+        {calculatedResult.map((result, index) => {
           return (
-            <tr>
+            <tr key={index}>
               {Object.entries(result).map(([name, value]) => (
-                <td>{formatter.format(value)}</td>
+                <td key={name}>{formatter.format(value)}</td>
               ))}
             </tr>
           );
