@@ -3,6 +3,7 @@ import { useState } from "react";
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import Log from "./components/Log.jsx";
+import GameOver from "./components/GameOver.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
 const initialGameBoard = [
@@ -23,10 +24,11 @@ function deriveActivePlayer(gameTurns) {
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
   // const [activePlayer, setActivePlayer] = useState("X");
+  // activePlayer - 활성화 된 플레이어
   const activePlayer = deriveActivePlayer(gameTurns);
 
+  // gameBoard - 게임판 업데이트
   let gameBoard = initialGameBoard;
-
   for (const turn of gameTurns) {
     const { square, player } = turn;
     const { row, col } = square;
@@ -34,7 +36,8 @@ function App() {
     gameBoard[row][col] = player;
   }
 
-  let winner = null;
+  // 승리 조건
+  let winner;
   for (const combination of WINNING_COMBINATIONS) {
     const firstSquareSymbol =
       gameBoard[combination[0].row][combination[0].column];
@@ -51,8 +54,11 @@ function App() {
       winner = firstSquareSymbol;
     }
   }
-  console.log(winner);
 
+  // 무승부
+  const hasDraw = gameTurns.length == 9 && !winner;
+
+  // 클릭 함수
   function handleSelectSquare(rowIndex, colIndex) {
     // setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
     setGameTurns((prevTurns) => {
@@ -81,7 +87,7 @@ function App() {
             isActive={activePlayer === "O"}
           ></Player>
         </ol>
-        {winner && <p>You Won, {winner}!</p>}
+        {(winner || hasDraw) && <GameOver winner={winner} />}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
