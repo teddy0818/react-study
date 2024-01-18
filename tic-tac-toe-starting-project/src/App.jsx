@@ -73,11 +73,11 @@ function App() {
   // 게임판 생성/업데이트
   let gameBoard = deriveGameBoard(gameTurns);
 
-  // 무승부 판단
-  const hasDraw = gameTurns.length == 9 && !winner;
-
   // 승자 판단
   const winner = deriveWinner(gameBoard, players);
+
+  // 무승부 판단
+  const hasDraw = gameTurns.length == 9 && !winner;
 
   // 게임판 클릭 함수
   function handleSelectSquare(rowIndex, colIndex) {
