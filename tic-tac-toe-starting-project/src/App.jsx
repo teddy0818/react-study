@@ -28,7 +28,11 @@ function App() {
   const activePlayer = deriveActivePlayer(gameTurns);
 
   // gameBoard - 게임판 업데이트
-  let gameBoard = initialGameBoard;
+  // 깊은 복사 사용해야함
+  // let gameBoard = initialGameBoard;
+  let gameBoard = [...initialGameBoard.map((array) => [...array])];
+  console.log(gameBoard);
+  console.log(initialGameBoard);
   for (const turn of gameTurns) {
     const { square, player } = turn;
     const { row, col } = square;
@@ -58,7 +62,7 @@ function App() {
   // 무승부
   const hasDraw = gameTurns.length == 9 && !winner;
 
-  // 클릭 함수
+  // 게임판 클릭 함수
   function handleSelectSquare(rowIndex, colIndex) {
     // setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
     setGameTurns((prevTurns) => {
@@ -70,6 +74,15 @@ function App() {
       ];
       return updatedTurns;
     });
+  }
+
+  // Restart 버튼 함수
+  function handleRestart() {
+    // setGameTurns(() => {
+    //   const updatedTurns = [];
+    //   return updatedTurns;
+    // });
+    setGameTurns([]);
   }
 
   return (
@@ -87,7 +100,9 @@ function App() {
             isActive={activePlayer === "O"}
           ></Player>
         </ol>
-        {(winner || hasDraw) && <GameOver winner={winner} />}
+        {(winner || hasDraw) && (
+          <GameOver winner={winner} onClickRestartBtn={handleRestart} />
+        )}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
