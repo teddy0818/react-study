@@ -8,9 +8,10 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const [activePlayer, setActivePlayer] = useState("X");
 
-  function handleSelectSquare() {
+  function handleSelectSquare(rowIndex, colIndex) {
     setActivePlayer((curActivePlayer) => (curActivePlayer === "X" ? "O" : "X"));
     setGameTurns((prevTurns) => {
+      // 다른 상태를 병합하지 않도록 새로운 변수 생성
       let currentPlayer = "X";
       if (prevTurns.length > 0 && prevTurns[0].player == "X") {
         currentPlayer = "O";
@@ -38,10 +39,7 @@ function App() {
             isActive={activePlayer === "O"}
           ></Player>
         </ol>
-        <GameBoard
-          onSelectSquare={handleSelectSquare}
-          activePlayerSymbol={activePlayer}
-        />
+        <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
       </div>
       <Log />
     </main>
