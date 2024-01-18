@@ -1,3 +1,13 @@
-export default function Log() {
-  return <ol id="log"></ol>;
+export default function Log({ logInfo }) {
+  return (
+    <ol id="log">
+      {logInfo.map((log) => {
+        return (
+          <li>
+            {log.square.row}, {log.square.col}, {log.player}
+          </li>
+        );
+      })}
+    </ol>
+  );
 }
