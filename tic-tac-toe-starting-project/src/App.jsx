@@ -6,7 +6,12 @@ import Log from "./components/Log.jsx";
 import GameOver from "./components/GameOver.jsx";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
-const initialGameBoard = [
+const PLAYERS = {
+  X: "Player 1",
+  O: "Player 2",
+};
+
+const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -21,22 +26,10 @@ function deriveActivePlayer(gameTurns) {
   return currentPlayer;
 }
 
-function App() {
-  const [gameTurns, setGameTurns] = useState([]);
-  // const [activePlayer, setActivePlayer] = useState("X");
-  // activePlayer - 활성화 된 플레이어
-  const activePlayer = deriveActivePlayer(gameTurns);
-  const [players, setPlayers] = useState({
-    X: "Player 1",
-    O: "Player 2",
-  });
-
+function deriveGameBoard(gameTurns) {
   // gameBoard - 게임판 업데이트
   // 깊은 복사 사용해야함
-  // let gameBoard = initialGameBoard;
-  let gameBoard = [...initialGameBoard.map((array) => [...array])];
-  // console.log(gameBoard);
-  // console.log(initialGameBoard);
+  let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
   for (const turn of gameTurns) {
     const { square, player } = turn;
     const { row, col } = square;
@@ -44,6 +37,10 @@ function App() {
     gameBoard[row][col] = player;
   }
 
+  return gameBoard;
+}
+
+function deriveWinner(gameBoard, players) {
   // 승리 조건
   let winner;
   for (const combination of WINNING_COMBINATIONS) {
@@ -63,8 +60,24 @@ function App() {
     }
   }
 
-  // 무승부
+  return winner;
+}
+
+function App() {
+  const [gameTurns, setGameTurns] = useState([]);
+  // const [activePlayer, setActivePlayer] = useState("X");
+  // activePlayer - 활성화 된 플레이어
+  const activePlayer = deriveActivePlayer(gameTurns);
+  const [players, setPlayers] = useState(PLAYERS);
+
+  // 게임판 생성/업데이트
+  let gameBoard = deriveGameBoard(gameTurns);
+
+  // 무승부 판단
   const hasDraw = gameTurns.length == 9 && !winner;
+
+  // 승자 판단
+  const winner = deriveWinner(gameBoard, players);
 
   // 게임판 클릭 함수
   function handleSelectSquare(rowIndex, colIndex) {
@@ -97,13 +110,13 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player
-            initName="Player 1"
+            initName={PLAYERS.O}
             symbol="X"
             isActive={activePlayer === "X"}
             onSave={handlePlayerNameChange}
           ></Player>
           <Player
-            initName="Player 2"
+            initName={PLAYERS.X}
             symbol="O"
             isActive={activePlayer === "O"}
             onSave={handlePlayerNameChange}
