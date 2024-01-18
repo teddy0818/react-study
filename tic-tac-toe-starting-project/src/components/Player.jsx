@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Player({ initName, symbol, isActive }) {
+export default function Player({ initName, symbol, isActive, onSave }) {
   const [playerName, setPlayerName] = useState(initName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -12,6 +12,11 @@ export default function Player({ initName, symbol, isActive }) {
     // 2. 옳은 방식
     // setIsEditing((editing) => !editing);
     setIsEditing((editing) => !editing);
+
+    // save 일때만 실행
+    if (isEditing) {
+      onSave(symbol, playerName);
+    }
   }
 
   function handleChange(event) {

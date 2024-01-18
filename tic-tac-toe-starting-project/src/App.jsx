@@ -26,13 +26,17 @@ function App() {
   // const [activePlayer, setActivePlayer] = useState("X");
   // activePlayer - 활성화 된 플레이어
   const activePlayer = deriveActivePlayer(gameTurns);
+  const [players, setPlayers] = useState({
+    X: "Player 1",
+    O: "Player 2",
+  });
 
   // gameBoard - 게임판 업데이트
   // 깊은 복사 사용해야함
   // let gameBoard = initialGameBoard;
   let gameBoard = [...initialGameBoard.map((array) => [...array])];
-  console.log(gameBoard);
-  console.log(initialGameBoard);
+  // console.log(gameBoard);
+  // console.log(initialGameBoard);
   for (const turn of gameTurns) {
     const { square, player } = turn;
     const { row, col } = square;
@@ -55,7 +59,7 @@ function App() {
       firstSquareSymbol === secondSquareSymbol &&
       firstSquareSymbol === thirdSquareSymbol
     ) {
-      winner = firstSquareSymbol;
+      winner = players[firstSquareSymbol];
     }
   }
 
@@ -78,11 +82,14 @@ function App() {
 
   // Restart 버튼 함수
   function handleRestart() {
-    // setGameTurns(() => {
-    //   const updatedTurns = [];
-    //   return updatedTurns;
-    // });
     setGameTurns([]);
+  }
+
+  // 플레이어명 변경 함수
+  function handlePlayerNameChange(symbol, newName) {
+    setPlayers((prevPlayers) => {
+      return { ...prevPlayers, [symbol]: newName };
+    });
   }
 
   return (
@@ -93,11 +100,13 @@ function App() {
             initName="Player 1"
             symbol="X"
             isActive={activePlayer === "X"}
+            onSave={handlePlayerNameChange}
           ></Player>
           <Player
             initName="Player 2"
             symbol="O"
             isActive={activePlayer === "O"}
+            onSave={handlePlayerNameChange}
           ></Player>
         </ol>
         {(winner || hasDraw) && (
