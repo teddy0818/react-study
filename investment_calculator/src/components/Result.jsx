@@ -17,11 +17,15 @@ export default function Result({ paramInputs }) {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Year</td>
-          <td>Year</td>
-          <td>Year</td>
-        </tr>
+        {calculatedResult.map((result) => {
+          return (
+            <tr>
+              {Object.entries(result).map(([name, value]) => (
+                <td>{formatter.format(value)}</td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
