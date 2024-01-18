@@ -16,7 +16,7 @@ function App() {
   const handleChangeInput = (name, value) => {
     setInputs((prevInputValues) => ({
       ...prevInputValues,
-      [name]: value,
+      [name]: Number(value),
     }));
     console.log(inputs);
   };
@@ -25,7 +25,7 @@ function App() {
     <>
       <Header />
       <UserInputs paramInputs={inputs} onInput={handleChangeInput} />
-      <Result />
+      <Result paramInputs={inputs} />
     </>
   );
 }

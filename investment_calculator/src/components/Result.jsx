@@ -1,21 +1,23 @@
-export default function Result() {
+import {
+  calculateInvestmentResults,
+  formatter,
+  colNames,
+} from "../util/investment.js";
+
+export default function Result({ paramInputs }) {
+  const calculatedResult = calculateInvestmentResults(paramInputs);
+  console.log(calculatedResult);
   return (
     <table id="result" className="center">
       <thead>
         <tr>
-          <td>Year</td>
-          <td>Year</td>
-          <td>Year</td>
-          <td>Year</td>
-          <td>Year</td>
-          <td>Year</td>
+          {colNames.map((colName) => (
+            <td>{colName}</td>
+          ))}
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Year</td>
-          <td>Year</td>
-          <td>Year</td>
           <td>Year</td>
           <td>Year</td>
           <td>Year</td>
