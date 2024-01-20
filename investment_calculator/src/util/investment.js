@@ -29,6 +29,7 @@ export function calculateInvestmentResults({
 }
 */
 
+// 새로 수정한 함수
 export function calculateInvestmentResults({
   initialInvestment,
   annualInvestment,

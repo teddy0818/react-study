@@ -4,14 +4,16 @@ export default function UserInputs({ paramInputs, onInput }) {
       <div className="input-group">
         {paramInputs &&
           Object.entries(paramInputs).map(([name, value]) => (
-            <div key={name}>
+            <p key={name}>
               <label>{name}</label>
               <input
+                required
+                min="1"
                 type="number"
                 value={value}
                 onChange={(e) => onInput(name, e.target.value)}
               />
-            </div>
+            </p>
           ))}
       </div>
     </div>
