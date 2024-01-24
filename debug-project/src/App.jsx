@@ -14,7 +14,6 @@ function App() {
 
   function handleChange(inputIdentifier, newValue) {
     setUserInput((prevUserInput) => {
-      console.log(prevUserInput);
       return {
         ...prevUserInput,
         // [inputIdentifier]: Number(newValue),
