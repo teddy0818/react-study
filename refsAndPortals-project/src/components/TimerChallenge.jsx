@@ -11,13 +11,18 @@ export default function PlayTimerChallenge({ title, targetTime }) {
   // 컴포넌트가 재실행되도 참조값은 유실되지 않는다
   // timer 자체가 UI와 직접적인 영향이 없기 때문에 사용하기 좋은 사례다
   const timer = useRef();
-  const [timerExpired, setTimerExpired] = useState();
+  const dialog = useRef();
+
   const [timerStarted, setTimerStarted] = useState();
+  const [timerExpired, setTimerExpired] = useState();
 
   function handleStart() {
     timer.current = setTimeout(() => {
       setTimerExpired(true);
+      console.log(dialog.current);
+      dialog.current.showModal();
     }, targetTime * 1000);
+
     setTimerStarted(true);
   }
 
@@ -27,12 +32,11 @@ export default function PlayTimerChallenge({ title, targetTime }) {
 
   return (
     <>
-      {timerExpired && (
-        <ResultModal
-          result={timerExpired ? "lost" : "win"}
-          targetTime={targetTime}
-        />
-      )}
+      <ResultModal
+        ref={dialog}
+        result={timerExpired ? "lost" : "win"}
+        targetTime={targetTime}
+      />
       <section className="challenge">
         <h2>{title}</h2>
         {timerExpired && <p>You lost!</p>}
