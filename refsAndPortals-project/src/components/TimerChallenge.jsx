@@ -19,8 +19,7 @@ export default function PlayTimerChallenge({ title, targetTime }) {
   function handleStart() {
     timer.current = setTimeout(() => {
       setTimerExpired(true);
-      console.log(dialog.current);
-      dialog.current.showModal();
+      dialog.current.open();
     }, targetTime * 1000);
 
     setTimerStarted(true);
