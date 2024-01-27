@@ -8,6 +8,7 @@ const ResultModal = forwardRef(function ResultModal(
 
   const userLost = remainingTime <= 0;
   const formatterRemainingTime = (remainingTime / 1000).toFixed(2);
+  const score = Math.round((1 - remainingTime / (targetTime * 1000)) * 100);
 
   // useImperativeHandle - 함수를 커스터 마이징 할때 쓰이기 좋다
   // 간단한 앱에서는 상관없지만, 복잡도가 높은 앱에서 쓰이기 좋다
@@ -21,8 +22,9 @@ const ResultModal = forwardRef(function ResultModal(
   });
 
   return (
-    <dialog ref={dialog} className="result-modal">
+    <dialog ref={dialog} className="result-modal" onClose={onReset}>
       {userLost && <h2>You Lost</h2>}
+      {!userLost && <h2>Your Score: {score}</h2>}
       <p>
         The target time was <strong>{targetTime} seconds.</strong>
       </p>
