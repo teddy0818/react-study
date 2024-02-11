@@ -3,12 +3,23 @@ import { useState } from "react";
 import NewProject from "./components/NewProject.jsx";
 import ProjectSidebar from "./components/ProjectSidebar.jsx";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
+import SelectedProject from "./components/SelectedProject.jsx";
 
 function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined, // undefined: 프로젝트를 선택하지 않음, null : 새로운 프로젝트 추가
     projects: [],
   });
+
+  function handleSelectProject(id) {
+    console.log(id);
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: id,
+      };
+    });
+  }
 
   function handleStartAddProject() {
     setProjectsState((prevState) => {
@@ -52,6 +63,12 @@ function App() {
     );
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
+  } else {
+    const targetProject = projectsState.projects.find(
+      (project) => project.id === projectsState.selectedProjectId
+    );
+    console.log(targetProject);
+    content = <SelectedProject project={targetProject} />;
   }
 
   return (
@@ -59,6 +76,8 @@ function App() {
       <ProjectSidebar
         onStartAddProject={handleStartAddProject}
         projects={projectsState.projects}
+        onSelect={handleSelectProject}
+        onSelectedId={projectsState.selectedProjectId}
       />
       {content}
     </main>
