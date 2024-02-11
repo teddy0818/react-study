@@ -9,7 +9,27 @@ function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined, // undefined: 프로젝트를 선택하지 않음, null : 새로운 프로젝트 추가
     projects: [],
+    tasks: [],
   });
+
+  function handleAddTask(text) {
+    setProjectsState((prevState) => {
+      console.log(projectsState.tasks);
+      const taskId = Math.random();
+      const newTask = {
+        text: text,
+        projectId: prevState.selectedProjectId,
+        id: taskId,
+      };
+
+      return {
+        ...prevState,
+        tasks: [...prevState.tasks, newTask],
+      };
+    });
+  }
+
+  function handleDeleteTask() {}
 
   function handleSelectProject(id) {
     console.log(id);
@@ -80,7 +100,13 @@ function App() {
       (project) => project.id === projectsState.selectedProjectId
     );
     content = (
-      <SelectedProject project={targetProject} onDelete={handleDeleteProject} />
+      <SelectedProject
+        project={targetProject}
+        onDelete={handleDeleteProject}
+        onAddTask={handleAddTask}
+        onDeleteTask={handleDeleteTask}
+        tasks={projectsState.tasks}
+      />
     );
   }
 
